@@ -44,7 +44,7 @@ export function DiscoveryCategoryCard({
       {/* Sliding Animated Layers */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         <div className="absolute w-[70%] h-[70%] -bottom-[70%] -left-[70%] bg-white/10 border-t-2 border-r-2 border-white/20 rounded-[10%_13%_42%_0%/10%_12%_75%_0%] transition-all duration-1000 group-hover:bottom-[-1px] group-hover:left-[-1px]" />
-        <div className="absolute w-[50%] h-[50%] -bottom-[50%] -left-[50%] bg-white/10 border-t-2 border-r-2 border-white/20 rounded-[10%_13%_42%_0%/10%_12%_75%_0%] transition-all duration-1000 delay-[0.2s] group-hover:bottom-[-1px] group-hover:left-[-1px]" />
+        <div className="absolute w-[50%] h-[50%] -bottom-[50%] -left-[50%] bg-white/10 border-t-2 border-r-2 border-white/20 rounded-[10%_13%_42%_0%/10%_12%_75%_0%] transition-all duration-1000 delay-200 group-hover:bottom-[-1px] group-hover:left-[-1px]" />
       </div>
 
       {/* Floating Icon Node */}

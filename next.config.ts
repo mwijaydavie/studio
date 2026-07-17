@@ -3,11 +3,10 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* 
-   * IMPORTANT FOR APK DEPLOYMENT:
-   * 'export' mode generates a static 'out' folder for Android Studio.
-   * Remote images must be unoptimized for WebView compatibility.
+   * REMOVED 'export' mode: 
+   * Server Actions (used for AI flows) require a dynamic server environment.
+   * Vercel will now handle the orchestration of your Gemini/Genkit nodes.
    */
-  output: 'export',
   typescript: {
     ignoreBuildErrors: true,
   },
