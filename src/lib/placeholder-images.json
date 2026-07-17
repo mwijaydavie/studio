@@ -1,0 +1,28 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-music",
+      "description": "Abstract musical notes and waves",
+      "imageUrl": "https://images.unsplash.com/photo-1770320606607-3a8d90ef7651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhYnN0cmFjdCUyMG11c2ljfGVufDB8fHx8MTc3MjM1OTEzNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract music"
+    },
+    {
+      "id": "neural-ai",
+      "description": "Abstract glowing brain and circuits",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-bcc4628c9757?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFpfGVufDB8fHx8MTc3MjM1OTEzNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "neural ai"
+    },
+    {
+      "id": "studio-vibe",
+      "description": "Dark music studio with neon lights",
+      "imageUrl": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtdXNpYyUyMHN0dWRpb3xlbnwwfHx8fDE3NzIzNTkxMzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music studio"
+    },
+    {
+      "id": "album-1",
+      "description": "Modern synthwave album cover",
+      "imageUrl": "https://images.unsplash.com/photo-1642516303080-431f6681f864?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzeW50aHdhdmUlMjBhcnR8ZW58MHx8fHwxNzcyMzA1ODgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "synthwave art"
+    }
+  ]
+}

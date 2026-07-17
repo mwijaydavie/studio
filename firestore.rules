@@ -1,0 +1,94 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Architect Profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) || isAdmin();
+
+      match /localTracks/{trackId} {
+        allow read, write: if isOwner(userId);
+      }
+      
+      match /listeningHistory/{historyId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /achievements/{achId} {
+        allow read: if isSignedIn();
+        allow write: if isOwner(userId);
+      }
+
+      match /favorites/{favId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /notifications/{notifyId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Global Premium Tracks (Monetization Hub)
+    match /globalTracks/{trackId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Artist Submissions Pipeline
+    match /artistSubmissions/{subId} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+
+    // Social Nodes (Reels)
+    match /reels/{reelId} {
+      allow read: if true;
+      // Allow atomic updates to stats for any signed-in user
+      allow update: if isSignedIn() && (
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likeCount', 'viewCount', 'commentCount'])
+      );
+      allow create: if isSignedIn();
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isSignedIn();
+        allow update, delete: if isOwner(resource.data.userId) || isAdmin();
+      }
+    }
+
+    // Shared Listening Rooms
+    match /listeningRooms/{roomId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      // Only the leader can update the track, time, and playback state
+      allow update: if isSignedIn() && (
+        (resource.data.leaderId == request.auth.uid) || 
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['participantCount']))
+      );
+      allow delete: if isSignedIn() && resource.data.leaderId == request.auth.uid;
+    }
+
+    // Playlists
+    match /playlists/{playlistId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+  }
+}

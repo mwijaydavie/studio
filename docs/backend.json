@@ -1,0 +1,142 @@
+
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "description": "Represents an architect of the AuraTune application.",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "role": { "type": "string", "enum": ["user", "admin"], "default": "user" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "username", "email", "createdAt"]
+    },
+    "GlobalTrack": {
+      "title": "GlobalTrack",
+      "type": "object",
+      "description": "Managed premium tracks available to all users (Monetized/Artist nodes).",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "artist": { "type": "string" },
+        "genre": { "type": "string" },
+        "audioUrl": { "type": "string", "format": "uri" },
+        "coverUrl": { "type": "string", "format": "uri" },
+        "isVerified": { "type": "boolean" },
+        "uploadedBy": { "type": "string" },
+        "price": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ArtistSubmission": {
+      "title": "ArtistSubmission",
+      "type": "object",
+      "description": "A request from an architect to list a track in the Global Node network.",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "artistName": { "type": "string" },
+        "genre": { "type": "string" },
+        "audioUrl": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "default": "pending" },
+        "submittedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ReelStats": {
+      "title": "ReelStats",
+      "type": "object",
+      "description": "Global resonance statistics for a visual pattern.",
+      "properties": {
+        "id": { "type": "string" },
+        "likeCount": { "type": "number", "default": 0 },
+        "viewCount": { "type": "number", "default": 0 },
+        "commentCount": { "type": "number", "default": 0 }
+      }
+    },
+    "Comment": {
+      "title": "Comment",
+      "type": "object",
+      "description": "Neural feedback on a visual pattern.",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ListeningRoom": {
+      "title": "ListeningRoom",
+      "type": "object",
+      "description": "A synchronized acoustic session for collaborative listening.",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "leaderId": { "type": "string" },
+        "activeTrackId": { "type": "string" },
+        "currentTime": { "type": "number" },
+        "isPlaying": { "type": "boolean" },
+        "participantCount": { "type": "number", "default": 1 },
+        "isPublic": { "type": "boolean", "default": true },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "leaderId", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "type": "object",
+      "description": "A neural transmission alert for an architect.",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["system", "frequency", "achievement"] },
+        "isRead": { "type": "boolean", "default": false },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["password", "anonymous", "google.com"]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": { "entityName": "User", "description": "Private architect profiles." }
+      },
+      {
+        "path": "/users/{userId}/notifications/{notifyId}",
+        "definition": { "entityName": "Notification", "description": "Private neural alerts." }
+      },
+      {
+        "path": "/globalTracks/{trackId}",
+        "definition": { "entityName": "GlobalTrack", "description": "Premium artist frequencies." }
+      },
+      {
+        "path": "/artistSubmissions/{subId}",
+        "definition": { "entityName": "ArtistSubmission", "description": "Pending frequency listings." }
+      },
+      {
+        "path": "/reels/{reelId}",
+        "definition": { "entityName": "ReelStats", "description": "Global pattern resonance stats." }
+      },
+      {
+        "path": "/reels/{reelId}/comments/{commentId}",
+        "definition": { "entityName": "Comment", "description": "Global pattern feedback." }
+      },
+      {
+        "path": "/listeningRooms/{roomId}",
+        "definition": { "entityName": "ListeningRoom", "description": "Synchronized session nodes." }
+      }
+    ]
+  }
+}

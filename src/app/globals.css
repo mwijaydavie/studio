@@ -1,0 +1,132 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* LIGHT SPECTRUM (High Contrast) */
+    --background: 0 0% 100%;
+    --foreground: 257 17% 4%;
+    --card: 0 0% 98%;
+    --card-foreground: 257 17% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 257 17% 4%;
+    --primary: 271 86% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 257 10% 90%;
+    --secondary-foreground: 257 17% 4%;
+    --muted: 257 10% 94%;
+    --muted-foreground: 257 10% 40%;
+    --accent: 237 100% 86%;
+    --accent-foreground: 257 17% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 257 10% 90%;
+    --input: 257 10% 90%;
+    --ring: 271 86% 62%;
+    --radius: 1.5rem;
+
+    --font-headline: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  .dark {
+    /* DARK SPECTRUM (Professional Workstation) */
+    --background: 257 17% 3%;
+    --foreground: 0 0% 98%;
+    --card: 257 17% 5%;
+    --card-foreground: 0 0% 98%;
+    --popover: 257 17% 4%;
+    --popover-foreground: 0 0% 98%;
+    --secondary: 257 10% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 257 10% 8%;
+    --muted-foreground: 257 10% 60%;
+    --border: 257 10% 12%;
+    --input: 257 10% 12%;
+  }
+
+  .theme-purple { --primary: 271 86% 62%; --ring: 271 86% 62%; }
+  .theme-blue { --primary: 217 91% 60%; --ring: 217 91% 60%; }
+  .theme-emerald { --primary: 160 84% 39%; --ring: 160 84% 39%; }
+  .theme-rose { --primary: 346 84% 61%; --ring: 346 84% 61%; }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground overflow-x-hidden antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: 
+      radial-gradient(circle at 0% 0%, hsla(var(--primary), 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 100% 100%, hsla(var(--accent), 0.03) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+/* 2026 HARDENED GLASSMORPHISM */
+.liquid-glass {
+  @apply backdrop-blur-[40px] border shadow-2xl transition-all duration-500 bg-background/40;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.dark .liquid-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-accent;
+}
+
+.animate-fade-in { @apply animate-in fade-in slide-in-from-bottom-2 duration-500; }
+
+.marquee-container { @apply overflow-hidden whitespace-nowrap relative w-full; }
+.marquee-container.is-overflowing .marquee-content {
+  @apply inline-block;
+  padding-left: 100%;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+.neon-shimmer {
+  @apply relative overflow-hidden px-8 py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-[10px] rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-xl shadow-primary/20;
+}
+
+.mini-visualizer { @apply flex items-end gap-[2px] h-4; }
+.mini-visualizer span { @apply w-[3px] bg-primary rounded-[1px]; animation: mini-bounce 0.8s ease-in-out infinite; }
+@keyframes mini-bounce { 0%, 100% { height: 4px; } 50% { height: 16px; } }
+
+.aura-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; pointer-events: none; }
+.aura-blob { 
+  position: absolute; 
+  border-radius: 50%; 
+  animation: drift 30s infinite alternate ease-in-out; 
+  opacity: 0.02; 
+}
+@keyframes drift { from { transform: translate(-30%, -30%) scale(1); } to { transform: translate(30%, 30%) scale(1.3); } }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes letter {
+  0% { opacity: 0; transform: translateY(10px) scale(0.8); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.animate-letter {
+  animation: letter 0.5s forwards ease-out;
+}
+
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
