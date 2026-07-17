@@ -3,6 +3,7 @@
 
 [![Version](https://img.shields.io/badge/Version-7.0-blue)]()
 [![Status](https://img.shields.io/badge/Status-Production--Ready-green)]()
+[![Deployment](https://img.shields.io/badge/Vercel-Optimized-black)]()
 
 ---
 
@@ -20,13 +21,9 @@ To push this workstation to your global account:
 1. Create a repository named `studio` on GitHub at `https://github.com/mwijaydavie/studio`.
 2. Run these commands:
 ```bash
-rm -rf .git
-git init
-git remote add origin https://github.com/mwijaydavie/studio.git
-git branch -M main
 git add .
 git commit -m "AuraTune Pro: Core Node Synchronization"
-git push -u origin main --force
+git push origin main
 ```
 
 ---
@@ -40,6 +37,7 @@ git push -u origin main --force
 | **Collective Sync** | ✅ Active | Firestore Real-time Listening Rooms |
 | **AI Cover Synthesis** | ✅ Active | Imagen 4.0 Fast Generate |
 | **Voice Studio** | ✅ Active | Gemini 2.5 TTS Preview |
+| **Deployment Node** | ✅ Vercel | Dynamic Server Actions Support |
 
 ---
 
