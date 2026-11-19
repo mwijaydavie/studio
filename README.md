@@ -1,48 +1,35 @@
 # AuraTune
 
-A mobile-first music discovery and listening app built with Next.js 15, React 19, Firebase, and Capacitor. The web app stays server-rendered so AI features can use Next.js server actions; the Android WebView points at a deployed AuraTune URL rather than pretending those server features work offline.
+AuraTune is a music discovery and listening product. The existing web app uses Next.js 15, React 19, Firebase, and Genkit. The Android client is being migrated to Flutter/Dart so audio playback can use Android's native media session, background service, notification, headset buttons, and lock-screen controls.
 
-## Develop
+## Web app
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Open [http://localhost:9002](http://localhost:9002). The development app uses the Firebase project configured in `src/firebase/config.ts`. AI features also need the provider credentials used by the Genkit flows in the server environment.
+Open [http://localhost:9002](http://localhost:9002). The web app uses the Firebase project configured in `src/firebase/config.ts`; AI features also need their provider credentials in the server environment.
 
-Useful checks:
+## Flutter Android app
+
+The first native slice lives in [`mobile/`](mobile/README.md). It provides a native Flutter audio player with a queue and Android background/media controls. Firebase catalog and account integration are not migrated yet; the Next.js site remains the web edition during the staged migration.
+
+Requirements: Flutter SDK, Java 17+, and Android Studio/Android SDK. From the repository root:
 
 ```bash
-npm run typecheck
-npm run build
+npm run mobile:init
 ```
 
-## Android APK
+The setup script also registers the Android media service and its permissions. Then run:
 
-Requirements: a deployed HTTPS AuraTune site, Node.js, Java 17+, and the Android SDK/Gradle tools. Capacitor loads the deployed site so Firebase authentication and server-backed AI routes remain available. Music and app features that depend on a network connection are not available offline.
+```bash
+npm run mobile:build  # debug APK
+npm run mobile:apk    # release APK
+```
 
-1. Install Android Studio and its Android SDK, then configure `ANDROID_HOME` (or `ANDROID_SDK_ROOT`) and Java.
-2. Add the native Android project once:
+Release APK output is `mobile/build/app/outputs/flutter-apk/app-release.apk`. Configure signing in the generated Gradle project before distributing a release. Do not commit a keystore or passwords.
 
-   ```bash
-   npm run mobile:init
-   ```
+## Migration scope
 
-3. Set `CAPACITOR_SERVER_URL` to the public HTTPS origin of the deployed app and sync/build the APK:
-
-   ```bash
-   export CAPACITOR_SERVER_URL=https://your-auratune-domain.example
-   npm run mobile:apk
-   ```
-
-   The release APK is produced under `android/app/build/outputs/apk/release/`. A release build without a configured signing key is unsigned; sign it with your own private Android keystore before distributing it. Never commit a keystore or its passwords.
-
-To refresh the native WebView after deploying a new web version, rerun `npm run mobile:build` (with `CAPACITOR_SERVER_URL` set). The native package itself does not contain a copy of the Next.js server or AI credentials.
-
-## Architecture notes
-
-- `npm run build` is the normal server deployment build. Do not enable Next.js static export: the app uses Server Actions for AI flows.
-- `capacitor.config.ts` accepts `CAPACITOR_SERVER_URL` and keeps cleartext HTTP disabled.
-- The PWA manifest and app icon are local assets under `src/app/manifest.ts` and `public/icons/`.
-- `src/components/layout/mobile-nav.tsx` and the persistent player account for mobile safe areas so the primary controls do not overlap.
+The new mobile player accepts direct HTTPS audio/stream URLs. It is a working native-audio foundation, not yet a full port of the web app's Firebase catalog, login, playlists, discovery, AI tools, or settings. Those will need to move into Flutter and connect to the existing Firebase/Next.js backend in later steps.

@@ -7,9 +7,20 @@ build/
 dist/
 dist-native/
 
-# Capacitor
+# Legacy generated Capacitor hosts
 android/
 ios/
+
+# Flutter Android host is source and should be committed once generated
+!mobile/android/
+!mobile/android/**
+
+# Flutter tool output
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+mobile/android/local.properties
+mobile/android/key.properties
 
 # Node
 node_modules/
