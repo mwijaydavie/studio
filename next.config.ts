@@ -2,11 +2,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  /* 
-   * REMOVED 'export' mode: 
-   * Server Actions (used for AI flows) require a dynamic server environment.
-   * Vercel will now handle the orchestration of your Gemini/Genkit nodes.
-   */
+  // Capacitor loads the hosted Next.js app so server-backed AI features continue to work.
   typescript: {
     ignoreBuildErrors: true,
   },
