@@ -2,7 +2,6 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  // Capacitor loads the hosted Next.js app so server-backed AI features continue to work.
   typescript: {
     ignoreBuildErrors: true,
   },
