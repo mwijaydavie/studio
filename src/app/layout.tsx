@@ -7,19 +7,22 @@ import { Providers } from '@/components/layout/providers';
 import RootLayoutClient from '@/components/layout/root-layout-client';
 
 export const metadata: Metadata = {
-  title: 'AuraTune Pro Workstation | High-Fidelity AI Studio',
-  description: 'The definitive high-density professional AI music studio and visual pattern manager. Built for Architects of the future sound.',
-  keywords: 'music, studio, ai, genkit, workstation, audio effects, offline music player',
-  manifest: '/manifest.json',
+  title: 'AuraTune — Music for your mood',
+  description: 'Discover new sounds and make a music library that feels like yours.',
+  keywords: 'music, discovery, listening, playlists, audio',
+  icons: {
+    icon: '/icons/aura-icon.svg',
+    apple: '/icons/aura-icon.svg',
+  },
+  manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'AuraTune',
   },
   openGraph: {
-    title: 'AuraTune Pro Workstation',
-    description: 'High-fidelity AI sound synthesis and architectural repository.',
-    url: 'https://auratune.app',
+    title: 'AuraTune — Music for your mood',
+    description: 'Discover new sounds and make a music library that feels like yours.',
     siteName: 'AuraTune',
     locale: 'en_US',
     type: 'website',
@@ -31,7 +34,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: '#A24CF1',
+  themeColor: '#09080d',
 };
 
 export default function RootLayout({

@@ -1,32 +1,26 @@
-
 import { MetadataRoute } from 'next'
 
 export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AuraTune Pro Workstation v7.0',
+    id: '/',
+    name: 'AuraTune — Music for your mood',
     short_name: 'AuraTune',
-    description: 'High-density professional AI music studio and visual pattern manager. Built for Architects of the future sound.',
+    description: 'Discover new sounds and make a music library that feels like yours.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#09080A',
-    theme_color: '#A24CF1',
+    background_color: '#09080d',
+    theme_color: '#09080d',
     orientation: 'portrait',
     scope: '/',
-    categories: ['music', 'productivity', 'multimedia'],
+    categories: ['music', 'entertainment'],
     icons: [
       {
-        src: 'https://picsum.photos/seed/aura-icon-192/192/192',
-        sizes: '192x192',
-        type: 'image/png',
+        src: '/icons/aura-icon.svg',
+        sizes: 'any',
+        type: 'image/svg+xml',
         purpose: 'maskable'
-      },
-      {
-        src: 'https://picsum.photos/seed/aura-icon-512/512/512',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'any'
       },
     ],
   }
